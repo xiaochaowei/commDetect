@@ -201,14 +201,15 @@ def preprocess():
 	prefix_data = data['networks']
 	# S = ComuputeSimilarity(phish_data)
 	G = nx.Graph()
-	genGraph(phish_data, G)
+	genGraph(phish_data[1:30,:], G)
 	# nx.draw(G)
 	# partition = communityDetect(G)
 	dendo = community.generate_dendrogram(G)
 	# print dendo
+	print len(dendo)
 	filename = "partition"
 	for level in range(len(dendo)):
-		save(filename + str(level), community.partition_at_level(dendo, level))
+		saveResult(filename + str(level), community.partition_at_level(dendo, level))
 		# print "partition at level", level,\
 			# "is ", community.partition_at_level(dendo, level)
 	# saveResult("partition2.txt", partition)
